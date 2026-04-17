@@ -1,5 +1,5 @@
-export const AddTask = () => {
-    return `<form id = "taskForm" action="https://jsonplaceholder.typicode.com/" method="GET">
+export const Add = () => {
+    return `<form id = "taskForm">
         <p>
             <label for="taskName">Task Name</label>
             <input type="text" id="taskName" name="taskName" required>

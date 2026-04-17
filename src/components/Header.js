@@ -1,7 +1,12 @@
+import { updateState } from "../main.js";
+
 export const Header = (view) => {
-    return `<nav>
-        <a>Add</a>
-        <a>Search</a>
-        <a>Stats</a>
-    </nav>`;
+    let res = "";
+    if(view != "home") res += `<a id="homeLink">Home</a>`;
+    if(view != "active") {
+        res += `<a id= "addLink">Add</a>`;
+        res += `<a id="findLink">Find</a>`
+    }
+    if(view != "stats") res += '<a id="statsLink>Stats</a>';
+    return res;
 }
