@@ -1,6 +1,15 @@
+const showSectionStats = (sections) => {
+    let res = "";
+    sections.forEach(section => res += `<div>${section.name}</div>
+        <div>${section.duration}/${section.timeTaken()}</div>`);
+    return res;
+}
+
+
 export const SessionComp = (session) => {
+    const date = new Date(session.startTime);
     return `<h3>${session.name}</h3>
-    <h4>${session.taskName}</h4>
-    <div>${session.startTime}</div>
-    <div>${session.endTime}</div>`;
+    <h5>${session.taskName}/${date.toDateString()} </h5>
+    <div>${session.getDuration()}/${session.timeTaken()}</div>
+    ${showSectionStats(session.sections)}`;
 }

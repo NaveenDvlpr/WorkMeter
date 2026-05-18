@@ -12,7 +12,7 @@ import { Find } from "./components/Find.js";
 import { findSetUp } from "./setup/FindSetUp.js";
 import { Recents } from "./components/Recents.js";
 
-const state = {
+let state = {
     view: "home",
     activeTask: null,
     sessionName: null,

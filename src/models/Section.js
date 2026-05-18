@@ -1,7 +1,7 @@
 export class Section {
     constructor(name, duration) {
         this.name = name;
-        this.duration = duration;
+        this.duration = Number(duration);
         this.startTime = null;
         this.endTime = null;
     }
@@ -12,5 +12,9 @@ export class Section {
 
     endSection() {
         this.endTime = Date.now();
+    }
+
+    timeTaken() {
+        return Math.floor((this.endTime-this.startTime)/1000);
     }
 }

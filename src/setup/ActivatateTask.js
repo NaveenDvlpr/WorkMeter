@@ -1,5 +1,6 @@
 import { updateState } from "../main.js";
 import { Session } from "../models/Session.js";
+import { Section } from "../models/Section.js";
 
 let time = 0;
 
@@ -30,33 +31,38 @@ export const activateTask = (task, sessionName, recents) => {
     const controlNext = document.getElementById("controlNext");
     const nextSection = document.getElementById("nextSection");
 
-    let atSection = 0, timerId, session = new Session(sessionName, task.name);
+    let atSection = 0, timerId, session = new Session(sessionName, task.name, task.duration);
     session.startSession();
+    session.addSections(task.sections);
+
+    if(task.sections.length == 1) controlNext.innerText="Finish";
+
 
     function displaySections() {
             if(atSection == 0) previousSection.innerText = ".......";
-            else previousSection.innerText = task.sections[atSection-1].name;
+            else previousSection.innerText = session.sections[atSection-1].name;
 
-            if(atSection == task.sections.length-1) nextSection.innerText="......";
-            else nextSection.innerText = task.sections[atSection+1].name;
-
-            sectionName.innerText = task.sections[atSection].name;
-            timerId = displayTimer(timerDisplay, task.sections[atSection].duration);
+            if(atSection == session.sections.length-1) nextSection.innerText="......";
+            else nextSection.innerText = session.sections[atSection+1].name;
+            sectionName.innerText = session.sections[atSection].name;
+            timerId = displayTimer(timerDisplay, session.sections[atSection].duration);
+            session.sections[atSection].startSection();
         }
 
     displaySections();
-    controlNext.addEventListener("click", (e) => {
-        e.preventDefault();
-        session.timings.push(time);
+    session.sections[atSection].startSection();
+    controlNext.addEventListener("click", () => {
+        session.sections[atSection].endSection();
+        clearInterval(timerId);
         time = 0;
         if(controlNext.innerText == "Next") {
-            if(atSection == task.sections.length-2) controlNext.innerText = "Finish";
-            clearInterval(timerId);
+            if(atSection == session.sections.length-2) controlNext.innerText = "Finish";
             atSection++;
             controlPlay.innerText = "Play";
             displaySections();
         } else {
             session.endSession();
+            session
             task.sessions.push(session);
             recents.push(session);
             updateState((state) => {
@@ -65,8 +71,7 @@ export const activateTask = (task, sessionName, recents) => {
         }
     })
 
-    controlPlay.addEventListener("click", (e) => {
-        e.preventDefault();
+    controlPlay.addEventListener("click", () => {
         if(controlPlay.innerText == "Pause") {
             clearInterval(timerId);
             controlPlay.innerText = "Resume";
