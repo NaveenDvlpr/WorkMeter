@@ -11,6 +11,7 @@ import { taskSetUp } from "./setup/TaskSetUp.js";
 import { Find } from "./components/Find.js";
 import { findSetUp } from "./setup/FindSetUp.js";
 import { Recents } from "./components/Recents.js";
+import { Stats } from "./components/Stats.js";
 
 let state = {
     view: "home",
@@ -35,7 +36,7 @@ const render = () => {
     } else if (view == "task") {
         app.innerHTML += TaskComp(state.activeTask);
     } else if(view == "stats") {
-        
+        app.innerHTML += Stats(state.tasks);
     } else if(view == "find") {
         app.innerHTML += Find(state.tasks);
     }

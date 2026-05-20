@@ -62,8 +62,7 @@ export const activateTask = (task, sessionName, recents) => {
             displaySections();
         } else {
             session.endSession();
-            session
-            task.sessions.push(session);
+            task.addSession(session);
             recents.push(session);
             updateState((state) => {
                 state.view = "task";

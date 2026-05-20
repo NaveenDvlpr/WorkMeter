@@ -18,4 +18,8 @@ export const setUpHeader = () => {
     if(findLink) findLink.addEventListener("click", () => {
         updateState(state => state.view = "find");
     })
+
+    if(statsLink) statsLink.addEventListener("click", () => {
+        updateState(state => state.view = "stats");
+    })
 }
