@@ -1,6 +1,59 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
 body {
+    min-height: 100vh;
     background: #333;
     color: whitesmoke;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+} 
+
+header h2 {
+    margin-left: 1rem;
+    padding: 0.5rem;
+
+}
+
+header nav {
+    width: 25%;
+    min-width: 200px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#app >* {
+    width: 100%;
+}
+
+.taskStats {
+    display: flex;
+    flex-direction: column;
+}
+
+.taskHeader {
+    display: flex;
+}
+
+.sections{
+    display: flex;
+    gap: 1rem;
 }
 
 #sectionInput > *{
@@ -9,4 +62,43 @@ body {
 
 #sectionInput > *:last-child {
     display: block;
+}
+
+.recents {
+     display: flex;
+     flex-direction: column;
+     gap: 0.5rem;
+}
+
+.session {
+    padding: 0.75rem;
+    border: 1px solid aliceblue;
+    border-radius: 10px;
+}
+
+.sessionHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sessionStats {
+    display: flex;
+    gap: 2em;
+}
+
+.taskForm {
+    padding: 0.5rem;
+    width: max(150px, 20%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid red;
+}
+
+.taskForm p{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }

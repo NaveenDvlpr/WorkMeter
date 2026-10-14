@@ -1,9 +1,11 @@
 export class Section {
-    constructor(name, duration) {
+    constructor({name, duration, startTime = null, endTime = null, timeSpent = 0, averageTimeTaken = 0}) {
         this.name = name;
-        this.duration = Number(duration);
-        this.startTime = null;
-        this.endTime = null;
+        this.duration = duration;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.timeSpent = timeSpent;
+        this.averageTimeTaken = averageTimeTaken;
     }
 
     startSection() {

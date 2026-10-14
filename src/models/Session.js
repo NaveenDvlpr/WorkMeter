@@ -2,13 +2,14 @@ import { Section } from "./Section.js";
 
 
 export class Session {
-    constructor(name, taskName, duration) {
+    constructor({name, taskName, duration, sections, startTime = null, endTime = null}) {
         this.name = name;
         this.taskName = taskName;
-        this.startTime = null;
-        this.endTime = null;
-        this.sections = [];
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.duration = duration;
+        this.sections = [];
+        sections.forEach(section => this.sections.push(new Section(section)));
     }
 
     startSession() {
@@ -26,10 +27,5 @@ export class Session {
     getDuration() {
         return this.duration;
     }
-
-    addSections(sections) {
-        sections.forEach(section => this.sections.push(new Section(section.name, section.duration)));
-    }
-
 
 }

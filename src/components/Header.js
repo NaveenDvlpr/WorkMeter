@@ -10,5 +10,8 @@ export const Header = (view) => {
     if(view != "stats") {
         res += `<a id="statsLink">Stats</a>`;
     }
-    return res;
+    return `<header>
+    <h2>WorkMeter</h2>
+    <nav>${res}</nav>
+    </header>`;
 }

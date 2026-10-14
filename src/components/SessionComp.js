@@ -1,15 +1,28 @@
 const showSectionStats = (sections) => {
     let res = "";
-    sections.forEach(section => res += `<div>${section.name}</div>
-        <div>${section.duration}/${section.timeTaken()}</div>`);
+    sections.forEach(section => {
+        let diff = section.timeTaken()-section.duration;
+        let direction = "fa-arrow-down";
+        if(diff <= 0) {
+            direction = "fa-arrow-up";
+            diff = (-diff);
+        }
+        res += `<div class="section">
+            <h5>${section.name}<small>
+            <i class="fa-solid ${direction}"></i>
+            <span>${diff}</span>
+            </small></h5>
+            <div>${section.duration}/${section.timeTaken()}</div>
+        </div>`});
     return res;
 }
 
 
 export const SessionComp = (session) => {
     const date = new Date(session.startTime);
-    return `<h3>${session.name}</h3>
-    <h5>${session.taskName}/${date.toDateString()} </h5>
-    <div>${session.getDuration()}/${session.timeTaken()}</div>
-    ${showSectionStats(session.sections)}`;
+    return `<div class="session">
+    <div class="sessionHeader"><h3>${session.name}(${session.getDuration()}/${session.timeTaken()})</h3>
+    <h5>${session.taskName}/${date.toDateString()} </h5></div>
+    <div class="sessionStats">${showSectionStats(session.sections)}</div>
+    </div>`;
 }

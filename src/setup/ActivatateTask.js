@@ -31,10 +31,9 @@ export const activateTask = (task, sessionName, recents) => {
     const controlNext = document.getElementById("controlNext");
     const nextSection = document.getElementById("nextSection");
 
-    let atSection = 0, timerId, session = new Session(sessionName, task.name, task.duration);
+    let atSection = 0, timerId, session = new Session({name: sessionName, taskName: task.name, duration: task.duration, sections: task.sections});
     session.startSession();
-    session.addSections(task.sections);
-
+    
     if(task.sections.length == 1) controlNext.innerText="Finish";
 
 
@@ -78,5 +77,8 @@ export const activateTask = (task, sessionName, recents) => {
             timerId = displayTimer(timerDisplay, task.sections[atSection].duration);
             controlPlay.innerText = "Pause";
         }
-    })
+    });
+
+    window.activeSession = session;
 }
+

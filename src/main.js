@@ -4,7 +4,7 @@ import { ActiveTask } from "./components/ActiveTask.js";
 import { AddTask } from "./setup/AddTask.js";
 import { activateTask } from "./setup/ActivatateTask.js";
 import { Task } from "./models/Task.js";
-import { Section } from "./models/Section.js";
+import { Session } from "./models/Session.js";
 import { TaskComp } from "./components/TaskComp.js";
 import { setUpHeader } from "./setup/SetUpHeader.js";
 import { taskSetUp } from "./setup/TaskSetUp.js";
@@ -13,16 +13,30 @@ import { findSetUp } from "./setup/FindSetUp.js";
 import { Recents } from "./components/Recents.js";
 import { Stats } from "./components/Stats.js";
 
-let state = {
-    view: "home",
-    activeTask: null,
-    sessionName: null,
-    tasks: [],
-    recents: []
-}
-
 const app = document.getElementById("app");
 
+const saveState = () => {
+    localStorage.setItem("state", JSON.stringify(state));
+}
+
+const loadState = () => {
+    return JSON.parse(localStorage.getItem("state")) || {
+        view: "home",
+        activeTask: null,
+        sessionName: null,
+        tasks: [],
+        recents: []
+    };
+}
+
+const makeState = () => {
+    const tempState = loadState();
+    tempState.tasks = tempState.tasks.map(task => new Task(task));
+    tempState.recents = tempState.recents.map(recent => new Session(recent));
+    return tempState;
+}
+
+let state = makeState();
 
 const render = () => {
     let view = state.view;
@@ -63,8 +77,10 @@ const setup = () => {
     setUpHeader();
 }
 
+
 export const updateState = (updater) => {
     updater(state);
+    saveState();
     render();
 }
 

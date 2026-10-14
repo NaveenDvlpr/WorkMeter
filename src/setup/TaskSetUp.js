@@ -5,7 +5,6 @@ export const taskSetUp = (task) => {
     const startSession = document.getElementById("startSession");
 
     startSession.addEventListener("click", () => {
-        console.log(sessionNameInput.value);
         if(sessionNameInput.value) {
             updateState((state) => {
                 state.view = "active";

@@ -1,5 +1,6 @@
 export const Add = () => {
-    return `<form id = "taskForm">
+    return `<form id = "taskForm" class="taskForm">
+        <h2>Add Task</h2>
         <p>
             <label for="taskName">Task Name</label>
             <input type="text" id="taskName" name="taskName" required>
@@ -9,7 +10,7 @@ export const Add = () => {
             <input type="number" id="sectionCount" min="1" required>
         </p>
         <div id="sectionInput"></div>
-        <button type="button" id="sectionButton">Next</button>
-        <button type="submit">Add</button>
+        <div><button type="button" id="sectionButton">Next</button>
+        <button type="submit">Add</button></div>
     </form>`;
 }

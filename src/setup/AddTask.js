@@ -51,7 +51,9 @@ export const AddTask = (tasks) => {
                 sections[keys[1]][keys[2]] = value;
             }
         }
-        tasks.push(new Task(taskName, sections));
+        tasks.push(new Task({name: taskName, sections: sections}));
+        sectionInput.innerHTML = "";
+        sectionButton.disabled = false;
         taskForm.reset();
     });
 }

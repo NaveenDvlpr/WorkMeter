@@ -4,5 +4,5 @@ export const Recents = (recents) => {
     let res = "";
     recents.forEach(recent => res += SessionComp(recent));
     if(res == "") res += "Hey! What's ur action today?";
-    return `<div>${res}</div>`;
+    return `<div class="recents">${res}</div>`;
 }
