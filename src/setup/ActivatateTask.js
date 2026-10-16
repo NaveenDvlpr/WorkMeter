@@ -52,12 +52,13 @@ export const activateTask = (task, sessionName, recents) => {
     session.sections[atSection].startSection();
     controlNext.addEventListener("click", () => {
         session.sections[atSection].endSection();
+        session.sections[atSection].updateTimeSpent(time);
         clearInterval(timerId);
         time = 0;
         if(controlNext.innerText == "Next") {
             if(atSection == session.sections.length-2) controlNext.innerText = "Finish";
             atSection++;
-            controlPlay.innerText = "Play";
+            controlPlay.innerText = "Pause";
             displaySections();
         } else {
             session.endSession();
@@ -81,4 +82,3 @@ export const activateTask = (task, sessionName, recents) => {
 
     window.activeSession = session;
 }
-

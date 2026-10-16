@@ -17,6 +17,10 @@ export class Section {
     }
 
     timeTaken() {
-        return Math.floor((this.endTime-this.startTime)/1000);
+        return this.timeSpent;
     }
-}
+
+    updateTimeSpent(time) {
+        this.timeSpent += time;
+    }
+} 
